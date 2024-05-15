@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+        }
+        .navbar-brand
+        {
+            position: relative;
+        }
+        .navbar-nav 
+        {
+            list-style-type: none;
+            display: flex;
+            position: absolute;
+            justify-content: space-evenly;
+            margin-left:25%;
+            justify-content: space-between;
+
+        }
+        .nav-item
+        {
+            margin-left: 8%;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <!-- <a class="navbar-brand" href="{% url 'home' %}">Static Project</a> -->
+            <h2>Static Project</h2>
+            <ul class="navbar-nav">
+                {%if context.logout%}
+
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}"><button>LOGOUT</button></a></li>
+               
+                {%else%}
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+               
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                <!-- Add more menu items as needed -->
+                {%endif%}
+            </ul>
+        </div>
+    </nav>
+    
+    {% block content %}
+    <!-- <h1>Landing page</h1> -->
+    {% endblock %}
+</body>
+</html>
