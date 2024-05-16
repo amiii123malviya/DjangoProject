@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +11,26 @@
     {% block content %}
 
  <h3>Welcome {{context.nm}}</h3>
+ {{key}}
 <h1>Query Form</h1>
-TO-DO-TASK:<textarea name="task" ></textarea>
+<form action="{% url 'queryform'  %}" method="post">
+    {% csrf_token  %}
+
+    Title:<textarea name="title" ></textarea>
 <br>
 <br>
-<input type="submit" value="Submit">
+Descriptions:<textarea name="Des" ></textarea>
 <br>
 <br>
+ <input type="email"  name="email" value="{{context.em}}" >
+<br>
+<br>
+ <input type="password"  name="email" value="{{context.ps}}" hidden>
+<br>
+<br>
+<input type="submit" value="Submit" >
+</form>
+
     {% endblock %}
 
     

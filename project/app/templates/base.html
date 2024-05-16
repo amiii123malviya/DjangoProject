@@ -7,6 +7,9 @@
     <style>
         .container{
             display: flex;
+            height: 70px;
+            width: 100%;
+            background-color:gray ;
         }
         .navbar-brand
         {
@@ -18,13 +21,22 @@
             display: flex;
             position: absolute;
             justify-content: space-evenly;
-            margin-left:25%;
+            margin-left:45%;
             justify-content: space-between;
 
         }
         .nav-item
         {
             margin-left: 8%;
+            font-size: 25px;
+            
+        }
+        .nav-link
+        {
+            color: black;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-decoration: none
+            ;
         }
         
     </style>
@@ -35,8 +47,8 @@
             <!-- <a class="navbar-brand" href="{% url 'home' %}">Static Project</a> -->
             <h2>Static Project</h2>
             <ul class="navbar-nav">
-                {%if context.logout%}
-
+                {%if context.nm%}
+                 {{context.nm}}
                 <li class="nav-item"><a class="nav-link" href="{% url 'home' %}"><button>LOGOUT</button></a></li>
                
                 {%else%}

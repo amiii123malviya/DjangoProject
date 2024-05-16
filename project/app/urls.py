@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+from .views import queryform
 
 urlpatterns=[
     path('',home,name='home'),
@@ -10,6 +11,8 @@ urlpatterns=[
     path('login/',login,name='login'),
     path('logindata/',logindata,name='logindata'),
     path('dashboard/',dashboard,name='dashboard'),
-    # path('',dashboard,name='dashboard'),
+    path('queryform/',queryform,name='queryform'),
+   
+    
 
 ]

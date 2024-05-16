@@ -4,7 +4,7 @@ from django.db import models
 class Student(models.Model):
     Name=models.CharField(max_length=300)
     Email=models.EmailField()
-    Password=models.IntegerField()
+    Password=models.CharField(max_length=300)
 
 
     class Meta:
@@ -13,4 +13,7 @@ class Student(models.Model):
     def __str__(self):
         return self.Name
     
-# class Query:
+class Query(models.Model):
+    Title=models.CharField(max_length=300)
+    Descriptions=models.CharField(max_length=300)
+    Email=models.EmailField()
