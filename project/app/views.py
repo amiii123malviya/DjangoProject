@@ -69,7 +69,7 @@ def dashboard(request):
 
 
 def queryform(request):
-    print(request.method)
+    # print(request.POST)
     title=request.POST.get('title')
     description=request.POST.get('Des')
     email=request.POST.get('email')
@@ -77,28 +77,79 @@ def queryform(request):
     Query.objects.create(Title=title,
                              Descriptions=description,
                              Email=email)
+    user1=Student.objects.get(Email=email)
+    context={
+               'nm':user1.Name,
+               'em':user1.Email,
+               'ps':user1.Password
+            } 
     data=Query.objects.filter(Email=email)
-    # print(data.email)
-    # ans=data.values()
-    # print(ans)
-    # title=data.title
-    # des=data.Descriptions
-    # email=data.Email
-    # print(email)
+    return render(request,'dashboard.html',{'key':data,'context':context})
 
-    user={
-        'title':title,
-        'des':description,
-        'email':email,
-        
-        # 'passrd':data.passwrd
-
-    }                
+                 
        
-    msg="query form submiited successfully"
-    return render(request,'dashboard.html',{'key':msg})
 def logout(request):
     return render(request,'home.html')
+def showdata(request):
+        # print(request.POST)
+        # email=request.POST.get('email')
+        # data1=Query.objects.get(Email=email )
+        # data={
+        #     # 'id':data1.id,
+        #     'email':data1.Email,
+        #     'title':data1.Title,
+        #     'des':data1.Descriptions
+
+        # }
+        # print(data1.Email)
+        # user1=Student.objects.get(Email=email)
+        # context={
+        #        'nm':user1.Name,
+        #        'em':user1.Email,
+        #        'ps':user1.Password
+        #     } 
+        #----------------------------------------------------------------------
+        print(request.POST)
+        email=request.POST.get('email')
+        datas=Query.objects.filter(Email=email)
+        if datas:
+            user1=Student.objects.get(Email=email)
+            context={
+               'nm':user1.Name,
+               'em':user1.Email,
+               'ps':user1.Password
+            } 
+            all_data=Query.objects.filter(Email=email)
+            return render(request,'dashboard.html',{'key1':all_data,'context':context})
+
+
+        # email=request.POST.get('email')
+        # data=Student.objects.get(Email=email)
+        # context={
+        #       'nm':data.Name,
+        #       'em':data.Email,
+        #       'ps':data.Password
+        #      } 
+        # query=Query.objects.filter(Email=email)
+        
+        # return render(request,'dashboard.html',{'key1':context,'query':query})
+def delete(request,pk,ml):
+    sdel=Query.objects.get(id=pk)
+    sdel.delete()
+    eml=Query.objects.get(Email=ml)
+    msg="data deleted"
+    datas=Query.objects.filter(Email=ml)
+    if datas:
+            user1=Student.objects.get(Email=ml)
+            context={
+               'nm':user1.Name,
+               'em':user1.Email,
+               'ps':user1.Password
+            } 
+            all_data=Query.objects.filter(Email=ml)
+            return render(request,'dashboard.html',{'key1':all_data,'context':context})
+
+
         
     
     

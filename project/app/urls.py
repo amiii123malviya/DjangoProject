@@ -12,6 +12,8 @@ urlpatterns=[
     path('logindata/',logindata,name='logindata'),
     path('dashboard/',dashboard,name='dashboard'),
     path('queryform/',queryform,name='queryform'),
+    path('showdata/',showdata,name='showdata'),
+    path('delete/<int:pk>/<ml>',delete,name='delete')
    
     
 

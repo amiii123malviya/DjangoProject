@@ -11,7 +11,6 @@
     {% block content %}
 
  <h3>Welcome {{context.nm}}</h3>
- {{key}}
 <h1>Query Form</h1>
 <form action="{% url 'queryform'  %}" method="post">
     {% csrf_token  %}
@@ -23,13 +22,45 @@ Descriptions:<textarea name="Des" ></textarea>
 <br>
 <br>
  <input type="email"  name="email" value="{{context.em}}" >
-<br>
-<br>
- <input type="password"  name="email" value="{{context.ps}}" hidden>
-<br>
-<br>
 <input type="submit" value="Submit" >
+
 </form>
+<form action="{% url 'showdata' %}" method="post">
+    {% csrf_token %}
+    <input type="email" value="{{context.em}}" name="email" hidden>
+    <input type="submit" value="showdata">
+</form>
+{% if key1 %}
+<table border="2">
+    <thead>
+<tr>
+    <th>ID</th>
+    <th>Email</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>EDit</th>
+    <th>Delete</th>
+</tr>
+       
+    </thead>
+    <tbody>
+        {% for i in key1 %}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.Email}}</td>
+            <td>{{i.Title}}</td>
+            <td>{{i.Descriptions}}</td>
+            <td><button><a href="{% url 'edit' pk=i.id %}">Edit</a></button></td>
+            <td><button><a href="{% url 'delete' pk=i.id ml=i.Email %}">Delete</a></button></td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+</table>
+{% endif %}
+
 
     {% endblock %}
 
