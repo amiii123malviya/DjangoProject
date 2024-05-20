@@ -50,7 +50,7 @@ Descriptions:<textarea name="Des" ></textarea>
             <td>{{i.Email}}</td>
             <td>{{i.Title}}</td>
             <td>{{i.Descriptions}}</td>
-            <td><button><a href="{% url 'edit' pk=i.id %}">Edit</a></button></td>
+            <td><button><a href="{% url 'edit' pk=i.id   %}">Edit</a></button></td>
             <td><button><a href="{% url 'delete' pk=i.id ml=i.Email %}">Delete</a></button></td>
 
         </tr>

@@ -123,20 +123,10 @@ def showdata(request):
             return render(request,'dashboard.html',{'key1':all_data,'context':context})
 
 
-        # email=request.POST.get('email')
-        # data=Student.objects.get(Email=email)
-        # context={
-        #       'nm':data.Name,
-        #       'em':data.Email,
-        #       'ps':data.Password
-        #      } 
-        # query=Query.objects.filter(Email=email)
-        
-        # return render(request,'dashboard.html',{'key1':context,'query':query})
 def delete(request,pk,ml):
     sdel=Query.objects.get(id=pk)
     sdel.delete()
-    eml=Query.objects.get(Email=ml)
+    eml=Query.objects.filter(Email=ml)
     msg="data deleted"
     datas=Query.objects.filter(Email=ml)
     if datas:
@@ -148,6 +138,46 @@ def delete(request,pk,ml):
             } 
             all_data=Query.objects.filter(Email=ml)
             return render(request,'dashboard.html',{'key1':all_data,'context':context})
+def edit(request,pk):   
+    print(request.POST)
+    email=request.POST.get('email')
+    sedt=Query.objects.get(id=pk)
+    
+    print("amii",sedt)
+    ml=Student.objects.filter(Email=email)
+    msg='data edit'
+    if ml:
+        user1=Student.objects.filter(Email=email)
+        context={
+                'nm':user1.Name,
+                'em':user1.Email,
+                'ps':user1.Password,
+                'logout':'logout'
+            } 
+        return render(request,'update.html',{'sedt':sedt,'context':context})
+
+
+  
+def update(request,pk):
+    udata=Query.objects.get(id=pk)
+    udata.Tittle=request.POST['title']
+    udata.Dec=request.POST['discrip']
+    udata.save()
+    email=request.POST.get('email')
+    ml=Student.objects.filter(Email=email)
+    msg='update data'
+    
+    if ml:
+        udata=Student.objects.filter(Email=email)
+
+        context={
+                'nm':udata.Name,
+                'em':udata.Email,
+                'ps':udata.Password,
+                'logout':'logout'
+            } 
+   
+        return render(request,'dashboard.html',{'udata':udata,'context':context})
 
 
         
