@@ -49,6 +49,7 @@
             <ul class="navbar-nav">
                 {%if context.nm%}
                  {{context.nm}}
+                 {{context.id}}
                 <li class="nav-item"><a class="nav-link" href="{% url 'home' %}"><button>LOGOUT</button></a></li>
                
                 {%else%}

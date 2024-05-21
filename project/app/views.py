@@ -143,32 +143,32 @@ def edit(request,pk):
     email=request.POST.get('email')
     sedt=Query.objects.get(id=pk)
     
-    print("amii",sedt)
+    print("sumit",sedt)
     ml=Student.objects.filter(Email=email)
     msg='data edit'
     if ml:
-        user1=Student.objects.filter(Email=email)
+        user1=Student.objects.get(Email=email)
         context={
                 'nm':user1.Name,
                 'em':user1.Email,
-                'ps':user1.Password,
+                'pass':user1.Password,
                 'logout':'logout'
-            } 
-        return render(request,'update.html',{'sedt':sedt,'context':context})
+        }
+        return render(request,'dashboard.html',{'sedt':sedt,'context':context})
 
 
   
 def update(request,pk):
     udata=Query.objects.get(id=pk)
-    udata.Tittle=request.POST['title']
-    udata.Dec=request.POST['discrip']
+    udata.Title=request.POST['title']
+    udata.Descriptions=request.POST['discrip']
     udata.save()
     email=request.POST.get('email')
     ml=Student.objects.filter(Email=email)
     msg='update data'
     
     if ml:
-        udata=Student.objects.filter(Email=email)
+        udata=Student.objects.get(Email=email)
 
         context={
                 'nm':udata.Name,
